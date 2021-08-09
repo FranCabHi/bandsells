@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  status: 1
+  total: 1
+  merchant_order_id: MyString
+  order: one
+
+two:
+  status: 1
+  total: 1
+  merchant_order_id: MyString
+  order: two
