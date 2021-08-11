@@ -10,18 +10,27 @@ User.delete_all
 code = "password"
 50.times do 
     User.create(
-        email: "band_"+"#{rand(1..50)}"+"@example.com"
-        name: Faker::Music.unique.band
-        country: Faker::Address.country
+        email: "owner_"+"#{rand(1..50)}"+"@example.com",
+        name: Faker::Music.unique.band,
+        country: Faker::Address.country,
         password: code
-    )
+    ).add_role :owner
 end
 
 50.times do 
     User.create(
-        email: "user_"+"#{rand(1..50)}"+"@example.com"
-        name: Faker::Name.unique.name
-        country: Faker::Address.country
+        email: "user_"+"#{rand(1..50)}"+"@example.com",
+        name: Faker::Name.unique.name,
+        country: Faker::Address.country,
         password: code
-    )
+    ).add_role :user
+end
+
+1.times do 
+    User.create(
+        email: "admin@example.com", 
+        name: "admin", 
+        country: "Chile", 
+        password: code
+    ).add_role :admin
 end
