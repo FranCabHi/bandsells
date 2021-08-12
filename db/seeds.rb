@@ -23,7 +23,7 @@ end
         name: Faker::Name.unique.name,
         country: Faker::Address.country,
         password: code
-    ).add_role :user
+    ).add_role :normaluser
 end
 
 1.times do 
