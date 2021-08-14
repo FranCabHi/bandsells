@@ -6,6 +6,11 @@
 </p>
 
 <p>
+  <strong>Product image:</strong>
+  <%= image_tag @product.image.variant(resize: "50x50") %>
+</p>
+
+<p>
   <strong>Description:</strong>
   <%= @product.description %>
 </p>
@@ -16,18 +21,13 @@
 </p>
 
 <p>
-  <strong>Quantity:</strong>
-  <%= @product.quantity %>
-</p>
-
-<p>
   <strong>Unit price:</strong>
   <%= @product.unit_price %>
 </p>
 
 <p>
   <strong>User:</strong>
-  <%= @product.user %>
+  <%= @product.user.name %>
 </p>
 
 <%= link_to 'Edit', edit_product_path(@product) %> |
