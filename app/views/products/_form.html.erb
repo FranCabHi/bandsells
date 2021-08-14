@@ -12,6 +12,11 @@
   <% end %>
 
   <div class="field">
+    <%= form.label "Product image" %>
+    <%= form.file_field :image %>
+  </div>
+
+  <div class="field">
     <%= form.label :title %>
     <%= form.text_field :title %>
   </div>
@@ -24,11 +29,6 @@
   <div class="field">
     <%= form.label :stock %>
     <%= form.number_field :stock %>
-  </div>
-
-  <div class="field">
-    <%= form.label :quantity %>
-    <%= form.number_field :quantity %>
   </div>
 
   <div class="field">
