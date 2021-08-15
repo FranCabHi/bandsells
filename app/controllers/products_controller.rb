@@ -1,6 +1,8 @@
 class ProductsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_product, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
+  
 
   # GET /products or /products.json
   def index
@@ -9,6 +11,7 @@ class ProductsController < ApplicationController
 
   # GET /products/1 or /products/1.json
   def show
+ 
   end
 
   # GET /products/new

@@ -20,7 +20,7 @@
 
 <p>
   <strong>Unit price:</strong>
-  <%= @product.unit_price %>
+  <%= number_to_currency(@product.unit_price, strip_insignificant_zeros: true, delimiter: ".") %>
 </p>
 
 <p>
@@ -28,5 +28,10 @@
   <%= @product.user.name %>
 </p>
 
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', products_path %>
+<% if product_owner(@product)  %>
+
+  <%= link_to 'Edit', edit_product_path(@product) %> |
+  <%= link_to "Delete", @product, method: :delete, data: {confirm: "Are you sure?"} %>
+<% end %>
+  <%= link_to 'Back', products_path %>
+  <%= current_user.has_role? :admin %>
