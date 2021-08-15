@@ -9,7 +9,7 @@
 					<% end %>
   	    	<div class="card-body">
   	      	<h5 class="card-title"><%= product.title %></h5>
-  	      	<p class="card-text"><%= product.unit_price %></p>
+  	      	<p class="card-text"><%= number_to_currency(product.unit_price, strip_insignificant_zeros: true, delimiter: ".") %></p>
   	    	</div>
   	  	</div>
   	</div>

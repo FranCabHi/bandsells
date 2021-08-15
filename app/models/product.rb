@@ -8,5 +8,5 @@ class Product < ApplicationRecord
   validates :title, :stock, :unit_price, presence: true
   validates :description, length: {maximum: 500, too_long: "%#{count} es el límite de caracteres."}
   validates :title, length: {maximum: 140, too_long: "%#{count} es el límite de caracteres."}
-  validates :price, numericality: {only_integer: true}
+  #validates :price, numericality: {only_integer: true}
 end

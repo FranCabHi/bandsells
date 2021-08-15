@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    @products = Product.with_attached_image.all
+    @products = Product.with_attached_image.all.order("created_at desc")
   end
 
   # GET /products/1 or /products/1.json
