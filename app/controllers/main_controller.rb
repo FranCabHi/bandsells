@@ -13,5 +13,10 @@ class MainController < ApplicationController
     @products = Product.all		
   end
 
+  def shop
+    @products = Product.all
+    @product_order = current_order.product_orders.new
+  end
+
 
 end
