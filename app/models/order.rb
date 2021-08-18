@@ -8,7 +8,7 @@ class Order < ApplicationRecord
 
   def subtotal
     product_orders.collect{|product_order| product_order.valid? ? product_order.unit_price*product_order.quantity : 0}.sum
-end
+  end
 
 
 

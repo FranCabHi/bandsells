@@ -6,6 +6,7 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
+    @product_order = current_order.product_orders.new
     @products = Product.with_attached_image.all.order("created_at desc")
   end
 

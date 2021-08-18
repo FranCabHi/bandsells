@@ -3,11 +3,10 @@ class ProductOrdersController < ApplicationController
   def create
       @order = current_order
       @product_order = @order.product_orders.new(order_params)
+      puts "#{current_order}"
       @order.save
       session[:order_id] = @order.id
   end
-
-
 
   def update
       @order = current_order
@@ -27,6 +26,6 @@ class ProductOrdersController < ApplicationController
   private
 
   def order_params
-      params.require(:product_order).permit(:product_id, :quantity)
+      params.require(:product_order).permit(:product_id, :quantity, :price, :subtotal)
   end
 end

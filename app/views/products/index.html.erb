@@ -1,5 +1,7 @@
 <h1>Goods & Merch</h1>
-
+<div id="cart">
+  <%= render 'carts/cart'%>
+</div>
 <%= render 'shared/productlist' %>
 
 <%= link_to "new product", new_product_path %>
