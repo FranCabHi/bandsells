@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   get "dashboard", to: "main#dashboard"
   root to: "main#index"
+
+  resource :cart, only: [:show, :update]
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

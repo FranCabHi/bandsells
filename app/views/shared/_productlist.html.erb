@@ -9,7 +9,14 @@
 					<% end %>
   	    	<div class="card-body">
   	      	<h5 class="card-title"><%= product.title %></h5>
-  	      	<p class="card-text"><%= number_to_currency(product.unit_price, strip_insignificant_zeros: true, delimiter: ".") %></p>
+  	      	<p class="card-text">
+              <%= number_to_currency(product.unit_price, strip_insignificant_zeros: true, delimiter: ".") %>
+              <%= form_for :cart, url: cart_path, method: :put do |f| %>
+                <%= f.hidden_field :product_id, value: product.id %>
+                <%= f.hidden_field :quantity, value: 1 %>
+                <%= f.submit "Add to cart" %>
+              <% end %>
+            </p>
   	    	</div>
   	  	</div>
   	</div>
