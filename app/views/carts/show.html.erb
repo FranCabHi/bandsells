@@ -21,6 +21,7 @@
                   <%= item.quantity %>
                 </div>
                 <div class="col-xs-2 col-md-2">
+                  <%= link_to "Remove product", @product, method: :delete, data: {confirm: "Are you sure?"} %>
                 </div>
             </div>
         </div>
