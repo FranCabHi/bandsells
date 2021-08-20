@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_16_000811) do
+ActiveRecord::Schema.define(version: 2021_08_14_003123) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 2021_08_16_000811) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "subtotal"
+    t.integer "quantity"
     t.integer "total"
     t.integer "state"
     t.bigint "user_id"
@@ -63,7 +63,6 @@ ActiveRecord::Schema.define(version: 2021_08_16_000811) do
     t.bigint "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "total"
     t.index ["order_id"], name: "index_product_orders_on_order_id"
     t.index ["product_id"], name: "index_product_orders_on_product_id"
   end
