@@ -1,6 +1,6 @@
 class Order < ApplicationRecord
   belongs_to :user
-  has_many :product_orders
+  has_many :product_orders, dependent: :destroy
   has_many :products, through: :product_orders
   has_one :payment
   resourcify
@@ -15,12 +15,11 @@ class Order < ApplicationRecord
     end
   end
 
-  def remove_product(product_id, quantity)
-    product = Product.find(product_id)
-    if product
-      product_orders.destroy(product_id: product.id, quantity: quantity, price: product.unit_price)
-      compute_total
+  def counting_products
+    qty = product_orders.count
+    update_attribute(:quantity, qty)
   end
+
 
   def compute_total
     sum = 0

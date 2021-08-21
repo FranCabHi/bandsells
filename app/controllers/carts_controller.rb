@@ -7,22 +7,21 @@ class CartsController < ApplicationController
     quantity = params[:cart][:quantity]
 
     current_order.add_product(product, quantity)
-
-    redirect_to root_url, notice: "Product added successfuly"
+    current_order.counting_products
+    redirect_to cart_url, notice: "Product added successfuly"
   end
 
   def show
     @order = current_order
   end
 
-  def destroy
-    product = params[:cart][:product_id]
-    quantity = params[:cart][:quantity]
-
-    current_order.remove_product(product, quantity)
-
-    redirect_to cart_path, notice: "Product removed successfuly"
-
+  def remove_product
+      order = Order.find(params[:order_id])
+      product = Product.find(params[:product_id])
+      order.products.delete(product)
+      order.compute_total
+      order.counting_products
+      redirect_to cart_path, notice: "Product removed successfuly"
   end
 
   private

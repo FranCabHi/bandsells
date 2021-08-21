@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get "dashboard", to: "main#dashboard"
   root to: "main#index"
 
-  resource :cart, only: [:show, :update, :destroy]
-  
+  resource :cart, only: [:show, :update]
+  delete 'cart/:order_id/remove_product/:product_id/', to: 'carts#remove_product', as: 'remove-product'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

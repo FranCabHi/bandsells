@@ -6,8 +6,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   
-  has_many :products
-  has_many :orders
+  has_many :products, dependent: :destroy
+  has_many :orders, dependent: :destroy
          
   def assign_default_role
     self.add_role(:normaluser) if self.roles.blank?

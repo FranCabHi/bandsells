@@ -5,23 +5,23 @@
         <div class="clearfix"></div>
     </div>
     <div class="card-body">
-      <% @order.product_orders.includes(:product).each do |item| %>
+      <% @order.products.each do |item| %>
         <div class="row">
             <div class="col-xs-2 col-md-2">
                 <img class="img-responsive" src="http://placehold.it/120x80" alt="prewiew">
             </div>
             <div class="col-xs-4 col-md-6">
-              <h4 class="product-name"><strong><%= item.product.title %></strong></h4><h4><small><%= item.product.description %></small></h4>
+              <h4 class="product-name"><strong><%= item.title %></strong></h4><h4><small><%= item.description %></small></h4>
             </div>
             <div class="col-xs-6 col-md-4 row">
                 <div class="col-xs-6 col-md-6 text-right" style="padding-top: 5px">
-                  <h6><strong><%= item.price%> <span class="text-muted">x</span></strong></h6>
+                  <h6><strong><%= item.unit_price%> <span class="text-muted">x</span></strong></h6>
                 </div>
                 <div class="col-xs-4 col-md-4">
-                  <%= item.quantity %>
+                  <%= item.get_quantity(@order)%>
                 </div>
                 <div class="col-xs-2 col-md-2">
-                  <%= link_to "Remove product", @product, method: :delete, data: {confirm: "Are you sure?"} %>
+                  <%= link_to 'Remove product', remove_product_path(@order.id, item.id), method: :delete  %>
                 </div>
             </div>
         </div>
