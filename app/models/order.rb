@@ -2,7 +2,7 @@ class Order < ApplicationRecord
   belongs_to :user
   has_many :product_orders, dependent: :destroy
   has_many :products, through: :product_orders
-  has_one :payment
+  has_one :payment, dependent: :destroy
   resourcify
 
   enum state: [:created, :pending, :completed]
@@ -27,10 +27,6 @@ class Order < ApplicationRecord
       sum += product.price
     end
     update_attribute(:total, sum)
-  end
-
-  def set_state_completed 
-    update_attribute(state: 2)
   end
 
 end

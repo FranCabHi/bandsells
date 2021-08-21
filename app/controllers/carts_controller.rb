@@ -39,21 +39,35 @@ class CartsController < ApplicationController
         }
       ],
       back_urls: {
-        success: "http://localhost:3000/orders",
-        failure: "http://localhost:3000/cart",
-        pending: "http://localhost:3000/products"
+        success: "http://localhost:3000/payment-info",
+        failure: "http://localhost:3000/",
+        pending: "http://localhost:3000/"
       },
       auto_return: "approved",
     }
     preference_response = sdk.preference.create(preference_data)
 
     preference = preference_response[:response]
-    
-    # Este valor reemplazará el string "<%= @preference_id %>" en tu HTML
+  
     @preference_id = preference['id']
 
     sandbox_init_point = preference["sandbox_init_point"]
     redirect_to sandbox_init_point
+  end
+
+  def payment_info
+    status_param = params[:status]
+    if status_param == "approved"
+      Payment.create(
+        status: status_param,
+        total: current_order.total,
+        merchant_order_id: params[:merchant_order_id],
+        order_id: current_order.id)
+      current_order.update_attribute(:state, 2)
+      redirect_to orders_path, notice: "Payment processed successfully"
+    else
+     redirect_to cart_path, alert: "Failed payment process, please try again"
+    end
   end
 
   private

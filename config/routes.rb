@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   resource :cart, only: [:show, :update]
   delete 'cart/:order_id/remove_product/:product_id/', to: 'carts#remove_product', as: 'remove-product'
   get "cart/:order_id/mercado-pago", to: "carts#mercadopago", as: "mercado-pago"
+  get "payment-info", to: "carts#payment_info"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
