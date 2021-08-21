@@ -3,8 +3,9 @@
 <table>
   <thead>
     <tr>
-      <th>Quantity</th>
-      <th>Total</th>
+      <th>Order number</th>
+      <th>Total product</th>
+      <th>Total price</th>
       <th>State</th>
       <th>User</th>
       <th colspan="3"></th>
@@ -14,10 +15,11 @@
   <tbody>
     <% @orders.each do |order| %>
       <tr>
+        <td><%= order.id %></td>
         <td><%= order.quantity %></td>
         <td><%= order.total %></td>
         <td><%= order.state %></td>
-        <td><%= order.user %></td>
+        <td><%= order.user.name %></td>
         <td><%= link_to 'Show', order %></td>
         <td><%= link_to 'Edit', edit_order_path(order) %></td>
         <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
