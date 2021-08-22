@@ -17,7 +17,7 @@
       <tr>
         <td><%= order.id %></td>
         <td><%= order.quantity %></td>
-        <td><%= order.total %></td>
+        <td><%= number_to_currency(order.total, strip_insignificant_zeros: true, delimiter: ".") %></td>
         <td><%= order.state %></td>
         <td><%= order.user.name %></td>
         <td><%= link_to 'Show', order %></td>

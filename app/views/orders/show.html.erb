@@ -5,7 +5,7 @@
 
 <p>
   <strong>Total:</strong>
-  <%= @order.total %>
+  <%= number_to_currency(order.total, strip_insignificant_zeros: true, delimiter: ".") %>
 </p>
 
 <p>

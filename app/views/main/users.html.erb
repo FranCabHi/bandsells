@@ -20,10 +20,10 @@
         <td><%= user.email %></td>
         <td><%= user.country %></td>
         <td><%= user.orders.where(state: 2).count %></td>
-        <% if user.has_role? :owner %>
+        <% if user.has_role? :normaluser %>
+          <td>Not allowed to add products</td>
+        <% else %>
           <td><%= user.products.count %></td>
-        <% else  %>
-          <td>No product added</td>
         <% end %>
         <td><%= user.roles.pluck(:name).join("; ") %></td>
         <td>
