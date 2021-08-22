@@ -3,8 +3,10 @@ Rails.application.routes.draw do
   resources :products
   devise_for :users
 
-  get "dashboard", to: "main#dashboard"
-  root to: "main#index"
+  root to: "dashboard", to: "main#dashboard"
+  get "users", to: "main#users"
+  get "/edit_role/:user_id", to: "main#edit_role", as: "edit_role"
+  post "/edit_role/:user_id", to: "main#edit_role", as: "update_role"
 
   resource :cart, only: [:show, :update]
   delete 'cart/:order_id/remove_product/:product_id/', to: 'carts#remove_product', as: 'remove-product'

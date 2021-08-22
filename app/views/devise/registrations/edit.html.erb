@@ -17,7 +17,7 @@
     <%= f.label :country %><br />
     <%= f.select :country, options_for_select(CS.countries.map { |c| [c[1]] } ) %>
   </div>
-
+ 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>

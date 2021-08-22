@@ -1,0 +1,36 @@
+<h1>Users</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Country</th>
+      <th>Completed orders</th>
+      <th>Posted products</th>
+      <th>Role</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.country %></td>
+        <td><%= user.orders.where(state: 2).count %></td>
+        <% if user.has_role? :owner %>
+          <td><%= user.products.count %></td>
+        <% else  %>
+          <td>No product added</td>
+        <% end %>
+        <td><%= user.roles.pluck(:name).join("; ") %></td>
+        <td>
+          <%= link_to "Edit role", edit_role_path(user) %>
+        </td>
+        <td><%= link_to 'Destroy user', registration_path(user), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -8,7 +8,7 @@ class User < ApplicationRecord
   
   has_many :products, dependent: :destroy
   has_many :orders, dependent: :destroy
-         
+
   def assign_default_role
     self.add_role(:normaluser) if self.roles.blank?
   end
@@ -16,4 +16,7 @@ class User < ApplicationRecord
   def admin?
     has_role?(:admin)
   end
+
+  
+
 end

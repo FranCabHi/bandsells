@@ -6,8 +6,8 @@ class Product < ApplicationRecord
   has_one_attached :image
   
   validates :title, :stock, :unit_price, presence: true
-  validates :description, length: {maximum: 500, too_long: "%#{count} es el límite de caracteres."}
-  validates :title, length: {maximum: 140, too_long: "%#{count} es el límite de caracteres."}
+  validates :description, length: {maximum: 500, too_long: "%#{count} exceeds the character limit."}
+  validates :title, length: {maximum: 140, too_long: "%#{count} exceeds the character limit."}
   
   def get_quantity(order)
     self.product_orders.where(order_id: order.id).pluck(:quantity).first
