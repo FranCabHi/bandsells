@@ -1,10 +1,14 @@
 Rails.application.routes.draw do
   resources :orders
-  resources :products
+  resources :products do
+    member do
+      put 'like' => 'products#like'
+    end
+  end
 
   Rails.application.routes.draw do
     devise_for :users, controllers: {
-      sessions: 'users/registrations'
+      registrations: 'users/registrations'
     }
   end
 

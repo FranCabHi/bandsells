@@ -8,6 +8,17 @@
   <%= image_tag @product.image.variant(resize: "50x50") %>
 </p>
 
+<div id="like-count">
+<%= render 'products/likes', product: @product %>
+</div>
+<div id="like-link">
+<%= render 'products/like_link', product: @product %>
+</div>
+<p>
+  <strong>Description:</strong>
+  <%= @product.description %>
+</p>
+
 <p>
   <strong>Description:</strong>
   <%= @product.description %>

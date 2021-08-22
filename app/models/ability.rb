@@ -10,7 +10,8 @@ class Ability
     elsif user.has_role? :owner
       can :manage, Product
     else
-      can :read, Product      
+      can :read, Product
+      can :like, Product
     end
 
     # Define abilities for the passed in user here. For example:

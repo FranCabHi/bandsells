@@ -8,6 +8,7 @@ class User < ApplicationRecord
   
   has_many :products, dependent: :destroy
   has_many :orders, dependent: :destroy
+  acts_as_voter
 
   def assign_default_role
     self.add_role(:normaluser) if self.roles.blank?

@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   load_and_authorize_resource
-  before_action :set_product, only: %i[ show edit update destroy ]
+  before_action :set_product, only: %i[ show edit update destroy like ]
   before_action :authenticate_user!
   
 
@@ -57,6 +57,14 @@ class ProductsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to products_url, notice: "Product was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  def like
+    if current_user.voted_for? @product
+      @product.unliked_by current_user
+    else
+      @product.liked_by current_user
     end
   end
 
