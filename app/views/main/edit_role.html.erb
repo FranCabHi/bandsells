@@ -16,6 +16,7 @@
 <%# end %>
 <%= form_for :role do |f| %>
   <div class="field">
+    <%= hidden_field_tag "user[role_ids][]", nil %>
     <%= f.label(:admin) do %>
       Admin
       <%= hidden_field_tag(:admin, 0) %>
@@ -25,7 +26,7 @@
     <%= f.label(:owner) do %>
       Owner
       <%= hidden_field_tag(:owner, 0) %>
-      <%= check_box_tag(:owner, 1, @user.has_role?(:manager)) %>
+      <%= check_box_tag(:owner, 1, @user.has_role?(:owner)) %>
     <% end %>
     <br>
     <%= f.label(:normaluser) do %>
