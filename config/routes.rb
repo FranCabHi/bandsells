@@ -1,9 +1,16 @@
 Rails.application.routes.draw do
   resources :orders
   resources :products
-  devise_for :users
 
-  root to: "dashboard", to: "main#dashboard"
+  Rails.application.routes.draw do
+    devise_for :users, controllers: {
+      sessions: 'users/registrations'
+    }
+  end
+
+
+  root to: "main#dashboard"
+
   get "users", to: "main#users"
   get "/edit_role/:user_id", to: "main#edit_role", as: "edit_role"
   post "/edit_role/:user_id", to: "main#edit_role", as: "update_role"
