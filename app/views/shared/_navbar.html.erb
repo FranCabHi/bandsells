@@ -32,5 +32,21 @@
             <% end %>
           </ul>
         </div>
+        <div class="d-flex">
+          <%= link_to cart_path, class:"nav-item" do %>
+            <button type="button" class="btn btn-primary position-relative">
+              <span><i class="fa fa-shopping-cart"></i></span>
+              Cart
+              <% if existing_order.present? %>
+                <% unless existing_order.quantity == 0  %>
+                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">                  
+                    <%= existing_order.quantity %>
+                    <span class="visually-hidden">products</span>
+                  </span>
+                <% end %>
+              <% end %>
+            </button>
+          <% end %>          
+        </div>
     </div>
 </nav>
