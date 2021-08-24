@@ -1,6 +1,5 @@
 class CartsController < ApplicationController
   before_action :authenticate_user!
-  #before_action :set_order
 
   def update
     product = params[:cart][:product_id]
@@ -76,7 +75,4 @@ class CartsController < ApplicationController
     params[:token]
   end
 
-  def set_order
-    @order = Order.find(params[:cart][:order_id])
-  end
 end

@@ -1,3 +1,10 @@
-<h1>Dashboard</h1>
+<% if current_user.admin? %>
+  <h1>Dashboard</h1>
+  <p><%= link_to "See Registered Users", users_path %></p>
+  <p><%= link_to "See Products for sell", product_list_path %></p>
+<% elsif current_user.has_role? :owner %>
+  <p><%= link_to "See Products for sell", product_list_path %></p>
+<% else %>
+#
+<% end %>
 
-<%= link_to "See Registered Users", users_path %>

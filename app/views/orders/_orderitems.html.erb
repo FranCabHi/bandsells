@@ -1,0 +1,19 @@
+<table>
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Unit price</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @order.products.each do |item| %>
+      <tr>
+        <td><%= item.title %></td>
+        <td><%= item.get_quantity(@order) %></td>
+        <td><%= number_to_currency(item.unit_price, strip_insignificant_zeros: true, delimiter: ".") %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

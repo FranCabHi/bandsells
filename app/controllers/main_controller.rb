@@ -1,6 +1,6 @@
 class MainController < ApplicationController
   #before_action :set_order, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!, only: %i[ dashboard ]
+  before_action :authenticate_user!, expect: %i[ index ]
 
   # GET /orders or /orders.json
   def index
@@ -15,6 +15,14 @@ class MainController < ApplicationController
 
   def users
     @users = User.all
+  end
+
+  def products
+    if current_user.has_role? :admin
+      @products = Product.all.order(stock: :desc)
+    else
+      @products = Product.where(user_id: current_user.id).order(stock: :desc)
+    end
   end
 
   def edit_role

@@ -15,19 +15,22 @@
   <tbody>
     <% @orders.each do |order| %>
       <tr>
-        <td><%= order.id %></td>
-        <td><%= order.quantity %></td>
-        <td><%= number_to_currency(order.total, strip_insignificant_zeros: true, delimiter: ".") %></td>
-        <td><%= order.state %></td>
-        <td><%= order.user.name %></td>
-        <td><%= link_to 'Show', order %></td>
-        <td><%= link_to 'Edit', edit_order_path(order) %></td>
-        <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% unless order.quantity == 0  %>
+          <td><%= order.id %></td>
+          <td><%= order.quantity %></td>
+          <td><%= number_to_currency(order.total, strip_insignificant_zeros: true, delimiter: ".") %></td>
+          <td><%= order.state %></td>
+          <td><%= order.user.name %></td>
+          <% if order.state == "created" %>
+            <td><%= link_to 'Cart', cart_path %></td>
+            <td><%= link_to 'Delete cart', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% else %>
+            <td><%= link_to 'Order details', order %></td>
+          <% end %>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Order', new_order_path %>

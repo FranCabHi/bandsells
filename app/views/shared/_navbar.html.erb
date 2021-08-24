@@ -37,7 +37,7 @@
             <button type="button" class="btn btn-primary position-relative">
               <span><i class="fa fa-shopping-cart"></i></span>
               Cart
-              <% if existing_order.present? %>
+              <% if user_signed_in? && existing_order.present? %>
                 <% unless existing_order.quantity == 0  %>
                   <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">                  
                     <%= existing_order.quantity %>
