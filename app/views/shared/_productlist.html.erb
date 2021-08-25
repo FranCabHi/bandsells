@@ -11,10 +11,14 @@
   	      	<h5 class="card-title"><%= product.title %></h5>
   	      	<p class="card-text">
               <%= number_to_currency(product.unit_price, strip_insignificant_zeros: true, delimiter: ".") %>
-              <%= form_for :cart, url: cart_path, method: :put do |f| %>
-                <%= f.hidden_field :product_id, value: product.id %>
-                <%= f.hidden_field :quantity, value: 1 %>
-                <%= f.submit "Add to cart" %>
+              <% if product.stock > 0  %>
+                <%= form_for :cart, url: cart_path, method: :put do |f| %>
+                  <%= f.hidden_field :product_id, value: product.id %>
+                  <%= f.hidden_field :quantity, value: 1 %>
+                  <%= f.submit "Add to cart" %>
+                <% end %>
+              <% else %>
+                <%= button_tag "Out of Stock", disabled: true, class: "btn btn-secondary btn-sm"%>
               <% end %>
             </p>
   	    	</div>

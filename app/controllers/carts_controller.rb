@@ -61,7 +61,9 @@ class CartsController < ApplicationController
         status: status_param,
         total: current_order.total,
         merchant_order_id: params[:merchant_order_id],
-        order_id: current_order.id)
+        order_id: current_order.id
+      )
+      current_order.compute_stock
       current_order.update_attribute(:state, 2)
       redirect_to orders_path, notice: "Payment processed successfully"
     else

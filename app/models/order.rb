@@ -20,13 +20,19 @@ class Order < ApplicationRecord
     update_attribute(:quantity, qty)
   end
 
-
   def compute_total
     sum = 0
     product_orders.each do |product|
       sum += product.price
     end
     update_attribute(:total, sum)
+  end
+
+  def compute_stock
+    product_orders.each do |product_order|
+      new_stock = product_order.product.stock - product_order.quantity
+      product_order.product.update(stock: new_stock) 
+    end
   end
 
 end
