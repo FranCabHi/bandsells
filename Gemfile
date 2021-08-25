@@ -27,6 +27,11 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+#Facebook sign-in
+gem 'omniauth-facebook'
+gem 'omniauth'
+gem 'omniauth-rails_csrf_protection'
+
 #Users and roles admin
 gem 'devise'
 gem 'cancancan'
