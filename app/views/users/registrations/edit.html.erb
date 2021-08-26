@@ -1,7 +1,7 @@
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
 <div id='js-error-block'></div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), remote: false) do |f| %> 
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), remote: true) do |f| %> 
 
   <%= render "devise/shared/error_messages", resource: resource %>
   
