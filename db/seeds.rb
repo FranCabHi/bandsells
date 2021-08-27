@@ -5,8 +5,12 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
-Product.delete_all
+# 
+# ProductOrder.delete_all
+# Product.delete_all
+# Order.delete_all
+# Payment.delete_all
+# 
 # code = "password"
 # 50.times do 
 #     User.create(

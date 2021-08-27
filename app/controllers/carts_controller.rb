@@ -27,7 +27,7 @@ class CartsController < ApplicationController
     order = Order.find(params[:order_id])
    
     require 'mercadopago'
-    sdk = Mercadopago::SDK.new(ENV['MERCADOPAGO_ACCESS_TOKEN'])
+    sdk = Mercadopago::SDK.new(ENV["MERCADOPAGO_ACCESS_TOKEN"])
 
     preference_data = {
       items: [
