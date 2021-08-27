@@ -52,7 +52,7 @@ gem 'kaminari'
 
 # Use ActiveStorage variant
 gem 'mini_magick', '~> 4.8'
-gem "aws-sdk-s3", "~> 1.96" 
+gem "aws-sdk-s3", "~> 1.96", require: false
 
 #nested forms
 gem 'cocoon'
