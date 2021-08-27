@@ -9,7 +9,7 @@ class OrderMailer < ApplicationMailer
     @greeting = "Hi"
 
     mail(
-      to: "bitterlatte@gmail.com",
+      to: "bitterlatte86@gmail.com",
       subject: "prueba correo"    
     )
   end
