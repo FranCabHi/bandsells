@@ -58,6 +58,10 @@ gem "aws-sdk-s3", "~> 1.96", require: false
 gem 'cocoon'
 gem 'jquery-rails'
 
+#Sentry
+gem "sentry-ruby"
+gem "sentry-rails"
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
