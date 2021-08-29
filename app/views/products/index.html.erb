@@ -1,5 +1,11 @@
-<h1>Goods & Merch</h1>
-
-<%= render 'shared/productlist' %>
-
-<%= link_to "new product", new_product_path %>
+<section class="page-section cta">
+  <div class="container">     
+    <h2 class="section-heading mb-4 cta-inner bg-faded text-center rounded">
+      <span class="section-heading-lower">Goods & Merch</span>
+    </h2>
+    <p>
+      <%= render 'shared/productlist' %>
+      <%= link_to "new product", new_product_path %>
+    </p>
+  </div>
+</section>

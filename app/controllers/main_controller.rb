@@ -1,6 +1,6 @@
 class MainController < ApplicationController
   #before_action :set_order, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!, expect: %i[ index ]
+  before_action :authenticate_user!, except: %i[ index ]
 
   # GET /orders or /orders.json
   def index

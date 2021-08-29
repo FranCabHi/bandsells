@@ -1,25 +1,40 @@
-<h2>Change your password</h2>
+<section class="page-section about-heading">
+  <div class="container">
+    <div class="about-heading-content">
+      <div class="row">
+        <div class="col-xl-9 col-lg-10 mx-auto">
+          <div class="bg-faded rounded p-5">
+            <h2 class="section-heading mb-4">
+              <span class="section-heading-upper">Change your passwords</span>
+            </h2>
+            <p>
+              <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+                <%= render "users/shared/error_messages", resource: resource %>
+                <%= f.hidden_field :reset_password_token %>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
-  <%= f.hidden_field :reset_password_token %>
+                <div class="field">
+                  <%= f.label :password, "New password" %><br />
+                  <% if @minimum_password_length %>
+                    <em>(<%= @minimum_password_length %> characters minimum)</em><br />
+                  <% end %>
+                  <%= f.password_field :password, autofocus: true, autocomplete: "new-password" %>
+                </div>
 
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
-    <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "new-password" %>
+                <div class="field">
+                  <%= f.label :password_confirmation, "Confirm new password" %><br />
+                  <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+                </div>
+
+                <div class="actions">
+                  <%= f.submit "Change my password" %>
+                </div>
+              <% end %>
+
+              <%= render "users/shared/links" %>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Change my password" %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+</section>

@@ -1,31 +1,48 @@
-<div class="row row-cols-1 row-cols-md-3 g-4">
-	<% @products.each do |product| %>
-  	<div class="col">
-  	  	<div class="card h-100">
-					<% if product.image.attached? %>
-            <%= link_to product do %>
-              <%= image_tag product.image, class: "card-img-top" %>
-            <% end  %>
-					<% end %>
-  	    	<div class="card-body">
-  	      	<h5 class="card-title"><%= product.title %></h5>
-  	      	<p class="card-text">
-              <%= number_to_currency(product.unit_price, strip_insignificant_zeros: true, delimiter: ".") %>
-              <% if product.stock > 0  %>
-                <%= form_for :cart, url: cart_path, method: :put do |f| %>
-                  <%= f.hidden_field :product_id, value: product.id %>
-                  <%= f.hidden_field :quantity, value: 1 %>
-                  <%= f.submit "Add to cart" %>
+<section class="py-5 ">
+  <div class="container px-4 px-lg-5 mt-5">
+    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+      <% @products.each do |product| %>
+        <div class="col mb-5">
+          <div class="card h-100">
+            <!-- Product image-->
+            <% if product.image.attached? %>
+              <%= link_to product do %>
+                <%= image_tag product.image, class: "card-img-top", alt: "#{product.title}" %>
+              <% end  %>
+					  <% end %>
+            <!-- Product details-->
+            <div class="card-body p-4">
+              <div class="text-center">
+                <!-- Product name-->
+                <h5 class="fw-bolder"><%= product.title %></h5>
+                <!-- Product reviews-->
+                <div class="d-flex justify-content-center small text-warning mb-2">
+                  <div id="like-count"><%= render 'products/likes', product: product %></div>
+                </div>
+                <!-- Product price-->
+                <%= number_to_currency(product.unit_price, strip_insignificant_zeros: true, delimiter: ".") %>
+              </div>
+            </div>
+            <!-- Product actions-->
+            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+              <div class="text-center">
+                <% if product.stock > 0  %>
+                  <%= form_for :cart, url: cart_path, method: :put do |f| %>
+                    <%= f.hidden_field :product_id, value: product.id %>
+                    <%= f.hidden_field :quantity, value: 1 %>
+                    <%= f.submit "Add to cart", class: "btn btn-outline-dark mt-auto" %>
+                  <% end %>
+                <% else %>
+                  <%= button_tag "Out of Stock", disabled: true, class: "btn btn-outline-dark mt-auto"%>
                 <% end %>
-              <% else %>
-                <%= button_tag "Out of Stock", disabled: true, class: "btn btn-secondary btn-sm"%>
-              <% end %>
-            </p>
-  	    	</div>
-  	  	</div>
-  	</div>
-	<% end %>
-</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
 
 
 

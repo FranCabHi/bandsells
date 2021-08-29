@@ -15,10 +15,11 @@ Rails.application.routes.draw do
   end
 
 
-  root to: "main#dashboard"
+  root to: "main#index"
 
   get "users", to: "main#users"
   get "product_list", to: "main#products"
+  get "dashboard", to: "main#dashboard"
   get "/edit_role/:user_id", to: "main#edit_role", as: "edit_role"
   post "/edit_role/:user_id", to: "main#edit_role", as: "update_role"
 
