@@ -1,41 +1,46 @@
-<p>
-  <strong>Title:</strong>
-  <%= @product.title %>
-</p>
-
-<p>
-  <strong>Product image:</strong>
-  <%= image_tag @product.image.variant(resize: "50x50") %>
-</p>
-
-<div id="like-count">
-<%= render 'products/likes', product: @product %>
-</div>
-<div id="like-link">
-<%= render 'products/like_link', product: @product %>
-</div>
-<p>
-  <strong>Description:</strong>
-  <%= @product.description %>
-</p>
-
-<p>
-  <strong>Stock:</strong>
-  <%= @product.stock %>
-</p>
-
-<p>
-  <strong>Unit price:</strong>
-  <%= number_to_currency(@product.unit_price, strip_insignificant_zeros: true, delimiter: ".") %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @product.user.name %>
-</p>
-
-<% if product_owner(@product) %>
-  <%= link_to 'Edit', edit_product_path(@product) %> |
-  <%= link_to "Delete", @product, method: :delete, data: {confirm: "Are you sure?"} %>
-<% end %>
-  <%= link_to 'Back', products_path %>
+<section class="py-5">
+  <div class="container px-4 px-lg-5 my-5">
+    <div class="row gx-4 gx-lg-5 align-items-center">
+      <div class="col-md-6">
+        <%= image_tag @product.image.variant(resize: "600x700"), class: "card-img-top mb-5 mb-md-0", alt: "#{@product.title}" %>
+      </div>
+      <div class="intro-text p-5 bg-faded rounded col-md-6">
+        <h2 class="section-heading mb-1">
+          <span class="section-heading-upper"><%= @product.user.name %></span>
+          <span class="section-heading-lower"><%= @product.title %></span>
+        </h2>
+        <div class="fs-5 mb-4">
+          <span><%= number_to_currency(@product.unit_price, strip_insignificant_zeros: true, delimiter: ".") %></span>
+        </div>
+        <p class="fw-bold address mb-5">
+          <%= @product.description %>
+        </p>
+        <div class="list-hours list-hours-item">
+          <div id="like-count"><%= render 'products/likes', product: @product %></div> |
+          <div id="like-link"><%= render 'products/like_link', product: @product %></div>
+        </div>
+        <div class="d-flex">
+          <% if @product.stock > 0  %>
+            <%= form_for :cart, url: cart_path, method: :put do |f| %>
+              <%= f.hidden_field :product_id, value: @product.id %>
+              <%= f.hidden_field :quantity, value: 1 %>
+              <%= f.submit "Add to cart", class: "btn btn-outline-dark mt-auto" %>
+            <% end %>
+          <% else %>
+            <%= button_tag "Out of Stock", disabled: true, class: "btn btn-outline-dark mt-auto"%>
+          <% end %>
+        </div>
+        <% if product_owner(@product) %>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-5">
+            <%= link_to edit_product_path(@product) do %>
+              <button class="btn btn-outline-dark btn-sm" type="button">Edit product</button>
+            <% end %>
+            <%= link_to @product, method: :delete, data: {confirm: "Are you sure?"} do %>
+              <button class="btn btn-outline-dark btn-sm" type="button">Delete product</button>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
