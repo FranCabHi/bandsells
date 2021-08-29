@@ -1,3 +1,11 @@
-<% vote_text = current_user&.voted_for?(product) ? "Unlike" : "Like" %>
+<% if current_user&.voted_for?(product) %>
+  <% vote_text = capture do %>
+    <i class="fas fa-heart fa-sm"></i> Unlike
+  <% end %>
+<% else %>
+  <% vote_text = capture do %>
+    <i class="far fa-heart fa-sm"></i> Like
+  <% end %>
+<% end %>
 
 <%= link_to vote_text, like_product_path(product), method: :put, remote: :true, class: "like-product"  %>

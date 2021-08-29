@@ -15,11 +15,11 @@
         <p class="fw-bold address mb-5">
           <%= @product.description %>
         </p>
-        <div class="list-hours list-hours-item">
-          <div id="like-count"><%= render 'products/likes', product: @product %></div> |
-          <div id="like-link"><%= render 'products/like_link', product: @product %></div>
-        </div>
-        <div class="d-flex">
+        <ul class="list-unstyled list-hours mb-5 text-left">
+          <li id="list-unstyled-item list-hours-item d-flex like-count"><%= render 'products/likes', product: @product %>
+          <span id="ms-auto like-link"> | <%= render 'products/like_link', product: @product %></span></li>
+        </ul>
+        <div class="d-flex pt-4">
           <% if @product.stock > 0  %>
             <%= form_for :cart, url: cart_path, method: :put do |f| %>
               <%= f.hidden_field :product_id, value: @product.id %>
