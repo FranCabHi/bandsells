@@ -38,9 +38,9 @@ class CartsController < ApplicationController
         }
       ],
       back_urls: {
-        success: "https://afternoon-harbor-73328.herokuapp.com/payment-info",
-        failure: "https://afternoon-harbor-73328.herokuapp.com/",
-        pending: "https://afternoon-harbor-73328.herokuapp.com/"
+        success: "http://localhost:3000/payment-info",
+        failure: "http://localhost:3000/",
+        pending: "http://localhost:3000/"
       },
       auto_return: "approved",
     }

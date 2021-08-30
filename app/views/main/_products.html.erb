@@ -1,0 +1,37 @@
+<div class="d-grid gap-2 d-md-flex justify-content-md-end mt-2">
+  <%= link_to new_product_path do %>
+    <button class="btn btn-outline-dark btn-sm" type="button">Add more products</button>
+  <% end %>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xl-9 col-lg-10 mx-auto">
+      <h1>Available products</h1>
+      
+      <table>
+        <thead>
+          <tr>
+            <th>Owner</th>
+            <th>Product</th>
+            <th>Description</th>
+            <th>Available Stock</th>
+            <th>Unit price</th>
+          </tr>
+        </thead>
+      
+        <tbody>
+          <% @products.each do |product| %>
+            <tr>
+              <td><%= product.user.name %></td>
+              <td><%= link_to product.title, product %></td>
+              <td><%= product.description %></td>
+              <td><%= product.stock %></td>
+              <td><%= number_to_currency(product.unit_price, strip_insignificant_zeros: true, delimiter: ".") %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

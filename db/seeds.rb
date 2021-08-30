@@ -45,10 +45,10 @@ users = User.with_role(:owner).pluck(:id)
     good = Product.create(
         title: Faker::Music.album,
         description: Faker::Lorem.sentence(word_count: 5),
-        stock: 50,
+        stock: rand(1..20),
         unit_price: rand(1199..2099)*10,
         user_id: users.sample
     )
-    random = rand(1..9)
+    random = rand(1..10)
     good.image.attach(io: File.open("app/assets/images/00"+"#{random}"+".jpg"), filename: "00"+"#{random}"+".jpg", content_type: 'image/jpg')
 end

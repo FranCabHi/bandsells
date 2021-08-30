@@ -1,56 +1,63 @@
 <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
-    <div class="container">
-       <%= link_to 'Bandsells', root_path, class: "navbar-brand text-uppercase fw-bold d-lg-none" %>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mx-auto">
-            <li class="nav-item px-lg-4 px-lg-4">
-              <%= link_to 'Home', root_path, class: "nav-link text-uppercase" %>
-            </li>
-            <li class="nav-item px-lg-4 px-lg-4">
-              <%= link_to 'Goods & Merch', products_path, class: "nav-link text-uppercase" %>
-            </li>
-            <% if user_signed_in? %>
-              <li class="nav-item px-lg-4">
-                <%= link_to 'Orders', orders_path, class: "nav-link text-uppercase" %>
+  <div class="container">
+    <%= link_to 'Bandsells', root_path, class: "navbar-brand text-uppercase fw-bold d-lg-none" %>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item px-lg-4 px-lg-4">
+          <% if user_signed_in? %>
+            <%= link_to 'Home', dashboard_path, class: "nav-link text-uppercase" %>
+          <% else %>
+            <%= link_to 'Home', root_path, class: "nav-link text-uppercase" %>
+          <% end %>
+        </li>
+        <li class="nav-item px-lg-4 px-lg-4">
+          <%= link_to 'Goods & Merch', products_path, class: "nav-link text-uppercase" %>
+        </li>
+        <% if user_signed_in? %>
+          <li class="nav-item px-lg-4">
+            <%= link_to 'Orders', orders_path, class: "nav-link text-uppercase" %>
+          </li>
+          <li class="nav-item dropdown">
+            <span class="nav-link dropdown-toggle text-uppercase" id="userOptions" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Logged in as <%= current_user.name %>
+            </span>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="userOptions">
+              <li>
+                <%= link_to 'Edit profile', edit_user_registration_path, class: "dropdown-item" %> 
               </li>
-              <li class="nav-item px-lg-4">
-                <%= link_to 'Edit profile', edit_user_registration_path, class: "nav-link text-uppercase" %> 
+              <li>
+                <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
               </li>
-              <li class="nav-item px-lg-4">
-               <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link text-uppercase" %>
-              </li>
-              <li class="nav-item px-lg-4">
-                <span class="nav-link text-uppercase disabled"> Logged in as <strong><%= current_user.name %></strong></span>
-              </li>
-             <% else %>
-              <li class="nav-item px-lg-4">
-                <%= link_to "Sign up", new_user_registration_path, class: "nav-link text-uppercase" %>
-              </li>
-              <li class="nav-item px-lg-4">
-                <%= link_to "Login", new_user_session_path, class: "nav-link text-uppercase" %>
-              </li>
+            </ul>
+          </li>
+         <% else %>
+          <li class="nav-item px-lg-4">
+            <%= link_to "Sign up", new_user_registration_path, class: "nav-link text-uppercase" %>
+          </li>
+          <li class="nav-item px-lg-4">
+            <%= link_to "Login", new_user_session_path, class: "nav-link text-uppercase" %>
+          </li>
+        <% end %>
+      </ul>
+      <div class="d-flex">
+        <%= link_to cart_path, class:"nav-item px-lg-4" do %>
+          <button type="button" class="btn btn-primary position-relative">
+            <span><i class="fa fa-shopping-cart"></i></span>
+            Cart
+            <% if user_signed_in? && existing_order.present? %>
+              <% unless existing_order.quantity == 0  %>
+                <span class="position-absolute top-0 start-100 translate-middle badge mark text-dark ms-1 rounded-pill">                  
+                  <%= existing_order.quantity %>
+                  <span class="visually-hidden">products</span>
+                </span>
+              <% end %>
             <% end %>
-          </ul>
-        
-          <div class="d-flex">
-            <%= link_to cart_path, class:"nav-item px-lg-4" do %>
-              <button type="button" class="btn btn-primary position-relative">
-                <span><i class="fa fa-shopping-cart"></i></span>
-                Cart
-                <% if user_signed_in? && existing_order.present? %>
-                  <% unless existing_order.quantity == 0  %>
-                    <span class="position-absolute top-0 start-100 translate-middle badge mark text-dark ms-1 rounded-pill">                  
-                      <%= existing_order.quantity %>
-                      <span class="visually-hidden">products</span>
-                    </span>
-                  <% end %>
-                <% end %>
-              </button>
-            <% end %>          
-          </div>
-        </div>
+          </button>
+        <% end %>          
+      </div>
     </div>
+  </div>
 </nav>

@@ -8,21 +8,20 @@ class MainController < ApplicationController
   end
   
 	def dashboard
-    @orders = Order.all
-    @users = User.all
-    @products = Product.all
+    if current_user.has_role? :admin
+      @products = Product.all.order(stock: :desc)
+      @users = User.all.joins(:roles).order(:role_id)
+    elsif current_user.has_role? :owner
+      @products = Product.where(user_id: current_user.id).order(stock: :desc)
+      @users = User.includes(:orders, :products).where(orders: {state: 2}, products: {user_id: current_user.id})
+    else
+      @products = Product.joins(:orders).where(orders: {user_id: current_user.id, state: 2})
+      @users = User.includes(:orders, :products).where(orders: {user_id: current_user.id, state: 2})
+    end
   end
 
   def users
     @users = User.all
-  end
-
-  def products
-    if current_user.has_role? :admin
-      @products = Product.all.order(stock: :desc)
-    else
-      @products = Product.where(user_id: current_user.id).order(stock: :desc)
-    end
   end
 
   def edit_role
