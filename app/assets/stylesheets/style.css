@@ -11652,7 +11652,7 @@ body {
       rgba(255, 255, 255, 0.014),
       rgba(236, 173, 152, 0.65)
     ),
-    url("/image/bg.jpg");
+    url("/images/bg.jpg");
   background-attachment: fixed;
   background-position: center;
   background-size: cover;
