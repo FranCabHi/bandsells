@@ -48,7 +48,7 @@
             <span><i class="fa fa-shopping-cart"></i></span>
             Cart
             <% if user_signed_in? && existing_order.present? %>
-              <% unless existing_order.quantity == 0  %>
+              <% unless existing_order.quantity == 0 || existing_order.quantity == nil %>
                 <span class="position-absolute top-0 start-100 translate-middle badge mark text-dark ms-1 rounded-pill">                  
                   <%= existing_order.quantity %>
                   <span class="visually-hidden">products</span>
