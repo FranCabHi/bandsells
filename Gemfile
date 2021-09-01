@@ -48,6 +48,7 @@ gem 'mercadopago-sdk'
 gem 'ransack'
 gem 'acts_as_votable'
 gem "chartkick"
+gem 'groupdate'
 gem 'kaminari'
 
 # Use ActiveStorage variant

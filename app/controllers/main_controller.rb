@@ -13,10 +13,10 @@ class MainController < ApplicationController
       @users = User.all.joins(:roles).order(role_id: :desc)
     elsif current_user.has_role? :owner
       @products = Product.where(user_id: current_user.id).order(stock: :desc)
-      @users = User.joins(:orders, :products).where(orders: {state: 2}, products: {user_id: current_user.id})
+    
     else
       @products = Product.joins(:orders).where(orders: {user_id: current_user.id, state: 2})
-      @users = User.joins(:orders, :products) 
+     
     end
   end
 

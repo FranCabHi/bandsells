@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
 
   # GET /orders or /orders.json
   def index
-    if user.has_role? :admin
+    if current_user.has_role? :admin
       @orders = Order.all.order(:state, created_at: :desc)
     else
       @orders = Order.where(user_id: current_user.id, state: 2).order('created_at DESC')

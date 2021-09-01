@@ -2,6 +2,7 @@
   "name": "bandsells",
   "private": true,
   "dependencies": {
+    "highcharts": "^9.2.2",
     "jquery": "^3.6.0"
   }
 }
