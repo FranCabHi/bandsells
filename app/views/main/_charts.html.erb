@@ -1,0 +1,19 @@
+<h2 class="section-heading my-5">
+  <span class="section-heading-upper">Best Sellers in Products</span>
+</h2>
+<%= bar_chart @best_products, xtitle: "Sales volume", ytitle: "Product", colors: ["#825f58"] %>
+<% if current_user.has_role?(:admin) %>
+  <h2 class="section-heading my-5">
+    <span class="section-heading-upper">Products per Seller</span>
+  </h2>
+  <%= column_chart @products_by_owner, xtitle: "Seller", ytitle: "# Product listed", colors: ["#825f58"] %>
+<% else %>
+  <h2 class="section-heading my-5">
+    <span class="section-heading-upper">Products per Stock</span>
+  </h2>
+  <%= column_chart @products_by_stock, xtitle: "Product", ytitle: "Available Stock", colors: ["#825f58"],  stacked: true %>
+<% end %>
+<h2 class="section-heading my-5">
+  <span class="section-heading-upper">Monthly Orders</span>
+</h2>
+<%= line_chart @monthly_completed_orders, ytitle: "# Orders", colors: ["#825f58"] %>

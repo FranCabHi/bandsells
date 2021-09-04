@@ -39,16 +39,50 @@
 #     ).add_role :admin
 # end
 
-users = User.with_role(:owner).pluck(:id)
+# users = User.with_role(:owner).pluck(:id)
 
-50.times do  
-    good = Product.create(
-        title: Faker::Music.album,
-        description: Faker::Lorem.sentence(word_count: 5),
-        stock: rand(1..20),
-        unit_price: rand(1199..2099)*10,
-        user_id: users.sample
-    )
-    random = rand(1..10)
-    good.image.attach(io: File.open("app/assets/images/00"+"#{random}"+".jpg"), filename: "00"+"#{random}"+".jpg", content_type: 'image/jpg')
+# 50.times do  
+    # good = Product.create(
+        # title: Faker::Music.album,
+        # description: Faker::Lorem.sentence(word_count: 5),
+        # stock: rand(1..20),
+        # unit_price: rand(1199..2099)*10,
+        # user_id: users.sample
+    # )
+    # random = rand(1..10)
+    # good.image.attach(io: File.open("app/assets/images/00"+"#{random}"+".jpg"), filename: "00"+"#{random}"+".jpg", content_type: 'image/jpg')
+# end
+
+products = Product.all.pluck(:id, :unit_price)
+users = User.with_role(:normaluser).pluck(:id)
+
+100.times do
+  product = products.sample
+  productid = product[0]
+  productprice = product[1]
+  date = Faker::Date.between(from: '2018-01-01', to: Date.today)
+
+  order = Order.create(
+    quantity: 1,
+    total: productprice,
+    state: 2,
+    user_id: users.sample,
+    created_at: date,
+  )
+
+  item = ProductOrder.create(
+    product_id: productid,
+    quantity: 1,
+    price: productprice,
+    order_id: order.id
+  )
+
+  paymentcreate = Payment.create(
+  status: 0,
+  total: productprice,
+  merchant_order_id: "3174290905",
+  order_id: order.id,
+  created_at: date,
+  )
+
 end

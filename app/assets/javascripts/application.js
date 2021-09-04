@@ -12,6 +12,7 @@
 //
 //= require rails-ujs
 //= require jquery
+//= require highcharts
 //= require chartkick
 //= require Chart.bundle
 //= require activestorage
