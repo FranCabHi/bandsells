@@ -12,10 +12,13 @@
                 <h2 class="accordion-header" id="flush-headingTwo">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
                     <%= current_user.has_role?(:normaluser) ? "Bought Products" : "Listed Products" %>
-                  </button>
+                  </button>          
                 </h2>
                 <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#dashboardAccordion">
-                  <div class="accordion-body"><%= render "main/products" %></div>
+                  <div class="accordion-body">
+  
+                    <%= render "main/products" %>
+                  </div>
                 </div>
               </div>
               <%# User list %>

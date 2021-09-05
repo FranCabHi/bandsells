@@ -3,6 +3,16 @@
     <%= link_to new_product_path do %>
       <button class="btn btn-outline-dark btn-sm" type="button">Add more products</button>
     <% end %>
+    <button class="btn btn-outline-primary btn-sm" type="button">
+      <%= sort_link @q, :unit_price do %>
+        Sort by Price
+      <% end %>
+    </button>
+    <button class="btn btn-outline-primary btn-sm" type="button">
+      <%= sort_link @q, :stock do %>
+        Sort by Stock
+      <% end %>
+    </button>
   </div>
 <% end %>
 
@@ -48,6 +58,11 @@
           <% end %>
         </tbody>
       </table>
+      <div class="pagination justify-content-center pagination-sm">
+        <h5 class="m-4 text-center p-3">
+          <span class="address" style="letter-spacing: 2px"><%= paginate @products %></span>
+        </h5>
+      </div>
     </div>
   </div>
 </div>

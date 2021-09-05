@@ -6,7 +6,9 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    @products = Product.with_attached_image.all.order("created_at desc")
+    @products = Product.with_attached_image.all.order("created_at desc").page(params[:page]).per(16)
+    @q = Product.includes(:user).ransack(params[:q])
+    @products = @q.result(distinct: true).page(params[:page]).per(16)
   end
 
   # GET /products/1 or /products/1.json

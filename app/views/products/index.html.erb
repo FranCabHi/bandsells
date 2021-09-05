@@ -1,11 +1,38 @@
 <section class="page-section cta">
   <div class="container">     
-    <h2 class="section-heading mb-4 cta-inner bg-faded text-center rounded p-2">
+    <h2 class="section-heading mb-5 cta-inner bg-faded text-center rounded p-2">
       <span class="section-heading-lower">Goods & Merch</span>
     </h2>
-    <p>
-      <%= render 'shared/productlist' %>
-      <%= link_to "new product", new_product_path %>
-    </p>
+    <div class="py-4 page-section cta-inner bg-faded ">
+      <div class="d-grid gap-2 d-md-flex flex-row justify-content-md-end mt-2">
+        <%= search_form_for @q do |f| %>
+          <div class="input-group p-2 bd-highlight ">
+            <%= f.search_field :title_or_user_name_cont, placeholder: "Search...", class: "form-control form-control-sm" %>
+            <%= f.submit "Search", class: "btn btn-outline-dark btn-sm" %>
+          </div>
+        <% end %>
+
+        <div class="input-group p-2 bd-highlight justify-content-md-end">
+          <% if current_user.has_cached_role?(:owner) || current_user.has_cached_role?(:admin) %>
+            <%= link_to new_product_path do %>
+              <button class="btn btn-outline-dark btn-sm" type="button">Add more products</button>
+            <% end %>
+          <% end %>
+          <button class="btn btn-outline-primary btn-sm" type="button">
+          <%= sort_link @q, :unit_price do %>
+         Sort by Price
+          <% end %>
+          </button>
+        </div>
+      </div>
+      <p>
+        <%= render 'shared/productlist' %>
+      </p>
+      <div class="pagination justify-content-center pagination-sm">
+        <h4 class="mb-4 cta-inner bg-faded text-center rounded p-3">
+          <span class="address" style="letter-spacing: 2px"><%= paginate @products, remote: true %></span>
+        </h4>
+      </div>
+    </div>
   </div>
 </section>
