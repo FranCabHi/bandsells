@@ -1,0 +1,7 @@
+Rails.ajax({
+  url: "/users/edit/",
+  type: "get",
+  success: function(data) { Rails.$('.edit-form').innerHTML = ("<%= j render 'edit', user: @user) %>")}
+  error: console.log "Ajax callback function"
+  completed: console.log "Ajax callback "
+})
