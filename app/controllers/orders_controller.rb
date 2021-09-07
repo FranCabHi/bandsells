@@ -6,10 +6,11 @@ class OrdersController < ApplicationController
   def index
     if current_user.has_role? :admin
       @orders = Order.all.order(:state, created_at: :desc).page(params[:page])
+      @q = Order.includes(:user).ransack(params[:q])
     else
       @orders = Order.where(user_id: current_user.id, state: 2).order('created_at DESC').page(params[:page])
+      @q = Order.includes(:user).where(user_id: current_user.id, state: 2).ransack(params[:q])
     end
-    @q = Order.includes(:user).ransack(params[:q])
     @orders = @q.result(distinct: true).order(:state, created_at: :desc).page(params[:page])
   end
 
