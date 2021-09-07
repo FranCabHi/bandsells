@@ -38,9 +38,9 @@ class CartsController < ApplicationController
         }
       ],
       back_urls: {
-        success: "http://bandsells.xyz/payment-info",
-        failure: "http://bandsells.xyz/",
-        pending: "http://bandsells.xyz/"
+        success: "https://afternoon-harbor-73328.herokuapp.com/payment-info",
+        failure: "https://afternoon-harbor-73328.herokuapp.com/",
+        pending: "https://afternoon-harbor-73328.herokuapp.com/"
       },
       auto_return: "approved",
     }
