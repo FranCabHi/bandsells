@@ -38,9 +38,9 @@ class CartsController < ApplicationController
         }
       ],
       back_urls: {
-        success: "http://localhost:3000/payment-info",
-        failure: "http://localhost:3000/",
-        pending: "http://localhost:3000/"
+        success: "http://bandsells.xyz/payment-info",
+        failure: "http://bandsells.xyz/",
+        pending: "http://bandsells.xyz/"
       },
       auto_return: "approved",
     }
@@ -55,6 +55,7 @@ class CartsController < ApplicationController
   end
 
   def payment_info
+    @order = current_order
     status_param = params[:status]
     if status_param == "approved"
       Payment.create(
@@ -64,6 +65,7 @@ class CartsController < ApplicationController
         order_id: current_order.id
       )
       current_order.compute_stock
+      CartMailer.approved_order(current_user).deliver_later
       current_order.update_attribute(:state, 2)
       redirect_to orders_path, notice: "Payment processed successfully"
     else
