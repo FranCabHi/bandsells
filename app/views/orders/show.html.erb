@@ -1,17 +1,30 @@
-<h1>Order #<%= @order.id %></h1>
-
-<p>
-  <strong>Payment:</strong>
-  <%= @order.payment.updated_at.strftime("%B %d, %Y") %>
-</p>
-
-<p>
-  <%= render 'orderitems', order: @order %>
-</p>
-
-<p>
-  <strong>Total:</strong>
-  <%= number_to_currency(@order.total, strip_insignificant_zeros: true, delimiter: ".") %>
-</p>
-
-<%= link_to 'Back', orders_path %>
+<section class="page-section">
+  <div class="container">
+    <div class="about-heading-content">
+      <div class="row">
+        <div class="col-xl-9 col-lg-10 mx-auto">
+          <div class="bg-faded rounded p-5">
+            <h2 class="section-heading mb-4">
+              <span class="section-heading-upper">Payment: <%= @order.payment.updated_at.strftime("%B %d, %Y") %></span>
+              <span class="section-heading-lower">Order #<%= @order.id %></span>
+            </h2>
+            <p>                  
+              <p>
+                <%= render 'orderitems', order: @order %>
+              </p>
+              
+              <p class="d-grid gap-2 d-md-flex justify-content-md-end mt-2 h3 blockquote">
+                <i><strong>Total:</strong>
+                <%= number_to_currency(@order.total, strip_insignificant_zeros: true, delimiter: ".") %></i>
+              </p>
+              
+              <%= link_to orders_path do %>
+                <button class="btn btn-outline-dark btn-sm" type="button">Back</button>
+              <% end %>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

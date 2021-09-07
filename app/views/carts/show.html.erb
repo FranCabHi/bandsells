@@ -1,38 +1,43 @@
-<div class="card">
-    <div class="card-header bg-dark text-light">
-        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-        <a href="<%= products_path%>" class="btn btn-outline-info btn-sm pull-right">Continue Shopping</a>
-        <div class="clearfix"></div>
-    </div>
-    <div class="card-body">
+<aside id="sidebar-cart">
+	<main>
+		<a href="#" class="close-button"><span class="close-icon">X</span></a>
+		<h2>Shopping Bag <span class="count"><%= existing_order.quantity %></span></h2>
+		<ul class="products">
       <% @order.products.each do |item| %>
-        <div class="row">
-            <div class="col-xs-2 col-md-2">
-                <img class="img-responsive" src="http://placehold.it/120x80" alt="prewiew">
-            </div>
-            <div class="col-xs-4 col-md-6">
-              <h4 class="product-name"><strong><%= item.title %></strong></h4><h4><small><%= item.description %></small></h4>
-            </div>
-            <div class="col-xs-6 col-md-4 row">
-                <div class="col-xs-6 col-md-6 text-right" style="padding-top: 5px">
-                  <h6><strong><%= number_to_currency(item.unit_price, strip_insignificant_zeros: true, delimiter: ".") %><span class="text-muted">x</span></strong></h6>
-                </div>
-                <div class="col-xs-4 col-md-4">
-                  <%= item.get_quantity(@order)%>
-                </div>
-                <div class="col-xs-2 col-md-2">
-                  <%= link_to 'Remove product', remove_product_path(@order.id, item.id), method: :delete  %>
-                </div>
-            </div>
-        </div>
-        <hr>
+			  <li class="product">
+			  	<a href="#" class="product-link">
+			  		<span class="product-image">
+              <% if item.image.attached? %>
+                  <%= image_tag item.image.variant(resize: "75x50"), alt: "#{item.title}" %>
+				      <% end %>
+			  		</span>
+			  		<span class="product-details">
+			  			<h3><%= item.title %></h3>
+			  			<span class="qty-price">
+			  				<span class="qty">
+                  <%= pluralize(item.get_quantity(@order), 'Item') %>
+			  				</span>
+			  				<span class="price"><%= number_to_currency(item.unit_price, strip_insignificant_zeros: true, delimiter: ".") %></span>
+			  			</span>
+			  		</span>
+			  	</a>
+          <%= link_to remove_product_path(@order.id, item.id), method: :delete, class: "remove-button" do %>
+            <span class="remove-icon">X</span>
+          <% end %>
+			  </li>
       <% end %>
+		</ul>
+		<div class="totals">
+			<div class="subtotal">
+				<span class="label">Total:</span> <span class="amount"><%= number_to_currency(@order.total, strip_insignificant_zeros: true, delimiter: ".") %></span>
+			</div>
+		</div>
+		<div class="action-buttons">
+			<a class="view-cart-button" href="#">Cart</a>
+      <%= link_to "Checkout", mercado_pago_path(@order.id), method: :get, class: "checkout-button" %>
+		</div>
+	</main>
+</aside>
+<div id="sidebar-cart-curtain"></div>
 
-    </div>
-    <div class="card-footer">
-        <div class="pull-right" style="margin: 5px">
-          Total: <%= number_to_currency(@order.total, strip_insignificant_zeros: true, delimiter: ".") %></b>
-          <%= button_to "Pay with mercado pago", mercado_pago_path(@order.id), method: :get, class:"btn btn-info btn-sm" %>
-        </div>
-    </div>
-</div>
+
