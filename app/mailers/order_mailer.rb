@@ -5,12 +5,5 @@ class OrderMailer < ApplicationMailer
   #
   #   en.order_mailer.approved_order.subject
   #
-  def approved_order
-    @greeting = "Hi"
 
-    mail(
-      to: "arisuki_dayo@yahoo.es",
-      subject: "prueba correo"    
-    )
-  end
 end

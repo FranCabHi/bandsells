@@ -1,17 +1,17 @@
-<table>
+<table class="table">
   <thead>
     <tr>
-      <th>Product</th>
-      <th>Quantity</th>
-      <th>Unit price</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Product</th>
+      <th scope="col">Unit price</th>
     </tr>
   </thead>
 
   <tbody>
     <% @order.products.each do |item| %>
       <tr>
-        <td><%= item.title %></td>
         <td><%= item.get_quantity(@order) %></td>
+        <td><strong><%= link_to item.title, item %></strong></td>
         <td><%= number_to_currency(item.unit_price, strip_insignificant_zeros: true, delimiter: ".") %></td>
       </tr>
     <% end %>

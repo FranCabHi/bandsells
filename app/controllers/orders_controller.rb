@@ -5,10 +5,12 @@ class OrdersController < ApplicationController
   # GET /orders or /orders.json
   def index
     if current_user.has_role? :admin
-      @orders = Order.all.order(:state, created_at: :desc)
+      @orders = Order.all.order(:state, created_at: :desc).page(params[:page])
     else
-      @orders = Order.where(user_id: current_user.id, state: 2).order('created_at DESC')
+      @orders = Order.where(user_id: current_user.id, state: 2).order('created_at DESC').page(params[:page])
     end
+    @q = Order.includes(:user).ransack(params[:q])
+    @orders = @q.result(distinct: true).order(:state, created_at: :desc).page(params[:page])
   end
 
   # GET /orders/1 or /orders/1.json
