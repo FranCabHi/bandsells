@@ -56,16 +56,15 @@ class CartsController < ApplicationController
 
   def payment_info
     @order = current_order
-    @user = current_user
     status_param = params[:status]
     if status_param == "approved"
-      Payment.create(
-        status: status_param,
-        total: current_order.total,
-        merchant_order_id: params[:merchant_order_id],
-        order_id: current_order.id
-      )
-      PaymentMailer.received_payment.with(user: current_user).deliver_later
+      created_payment = Payment.create(
+                          status: status_param,
+                          total: current_order.total,
+                          merchant_order_id: params[:merchant_order_id],
+                          order_id: current_order.id
+                        )
+      PaymentMailer.received_payment(current_user, current_order, created_payment).deliver_later
       current_order.compute_stock
       current_order.update_attribute(:state, 2)
       redirect_to orders_path, notice: "Payment processed successfully"

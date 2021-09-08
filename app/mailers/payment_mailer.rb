@@ -5,10 +5,12 @@ class PaymentMailer < ApplicationMailer
   #
   #   en.payment_mailer.received_payment.subject
   #
-  def received_payment
-    @user = current_user
+  def received_payment(user, order, payment)
+    @user = user
+    @order = order
+    @payment = payment
     mail(
-      to: @user.email,
+      to: user.email,
       subject: 'Thank you for your purchase!'
     )
   end
