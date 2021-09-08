@@ -22,23 +22,23 @@ code = "password"
 #   ).add_role :admin
 # end
 
-50.times do 
-  a = User.create(
-      email: "owner#{rand(100..200)}@example.com",
-      name: Faker::Artist.unique.name,
-      country: Faker::Address.country,
-      password: code)
-  a.add_role :owner
-  a.remove_role :normaluser
-end
+# 50.times do 
+#   a = User.create(
+#       email: "owner#{rand(100..200)}@example.com",
+#       name: Faker::Artist.unique.name,
+#       country: Faker::Address.country,
+#       password: code)
+#   a.add_role :owner
+#   a.remove_role :normaluser
+# end
 
-50.times do 
-  User.create(
-      email: "user#{rand(100..200)}@example.com",
-      name: Faker::Name.unique.name,
-      country: Faker::Address.country,
-      password: code)
-end
+# 50.times do 
+#   User.create(
+#       email: "user#{rand(100..200)}@example.com",
+#       name: Faker::Name.unique.name,
+#       country: Faker::Address.country,
+#       password: code)
+# end
 
 
 users = User.with_role(:owner).pluck(:id)
