@@ -65,7 +65,7 @@ class CartsController < ApplicationController
         merchant_order_id: params[:merchant_order_id],
         order_id: current_order.id
       )
-      CartMailer.approved_order(current_user).deliver_later
+      PaymentMailer.received_payment.with(user: current_user).deliver_later
       current_order.compute_stock
       current_order.update_attribute(:state, 2)
       redirect_to orders_path, notice: "Payment processed successfully"

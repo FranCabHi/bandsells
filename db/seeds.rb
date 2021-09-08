@@ -11,7 +11,7 @@
 # Order.delete_all
 # Payment.delete_all
 
-code = "password"
+# code = "password"
 
 # 1.times do 
 #   User.create(
@@ -41,54 +41,54 @@ code = "password"
 # end
 
 
-users = User.with_role(:owner).pluck(:id)
+# users = User.with_role(:owner).pluck(:id)
 
-60.times do  
-  good = Product.create(
-      title: Faker::Music.unique.album,
-      description: Faker::Lorem.sentence(word_count: 5),
-      stock: rand(1..20),
-      unit_price: rand(1199..2099)*10,
-      user_id: users.sample
-  )
-  random = rand(1..10)
-  good.image.attach(io: File.open("app/assets/images/00"+"#{random}"+".jpg"), filename: "00"+"#{random}"+".jpg", content_type: 'image/jpg')
-end
+# 60.times do  
+#   good = Product.create(
+#       title: Faker::Music.unique.album,
+#       description: Faker::Lorem.sentence(word_count: 5),
+#       stock: rand(1..20),
+#       unit_price: rand(1199..2099)*10,
+#       user_id: users.sample
+#   )
+#   random = rand(1..10)
+#   good.image.attach(io: File.open("app/assets/images/00"+"#{random}"+".jpg"), filename: "00"+"#{random}"+".jpg", content_type: 'image/jpg')
+# end
 
-products = Product.all.pluck(:id, :unit_price)
-u_normal = User.with_role(:normaluser).pluck(:id)
+# products = Product.all.pluck(:id, :unit_price)
+# u_normal = User.with_role(:normaluser).pluck(:id)
 
-100.times do
-  product = products.sample
-  productid = product[0]
-  productprice = product[1]
-  date = Faker::Date.between(from: '2018-01-01', to: Date.today)
+# 100.times do
+#   product = products.sample
+#   productid = product[0]
+#   productprice = product[1]
+#   date = Faker::Date.between(from: '2018-01-01', to: Date.today)
 
-  order = Order.create(
-    quantity: 1,
-    total: productprice,
-    state: 2,
-    user_id: u_normal.sample,
-    created_at: date,
-    updated_at: date,
-  )
+#   order = Order.create(
+#     quantity: 1,
+#     total: productprice,
+#     state: 2,
+#     user_id: u_normal.sample,
+#     created_at: date,
+#     updated_at: date,
+#   )
 
-  item = ProductOrder.create(
-    product_id: productid,
-    quantity: 1,
-    price: productprice,
-    order_id: order.id
-  )
+#   item = ProductOrder.create(
+#     product_id: productid,
+#     quantity: 1,
+#     price: productprice,
+#     order_id: order.id
+#   )
 
-  paymentcreate = Payment.create(
-  status: 0,
-  total: productprice,
-  merchant_order_id: "3174290905",
-  order_id: order.id,
-  created_at: date,
-  updated_at: date,
-  )
+#   paymentcreate = Payment.create(
+#   status: 0,
+#   total: productprice,
+#   merchant_order_id: "3174290905",
+#   order_id: order.id,
+#   created_at: date,
+#   updated_at: date,
+#   )
 
-end
+# end
 
-puts "done"
+# puts "done"
