@@ -1,0 +1,10 @@
+Thank you for your purchase, <%= @user.name %>!
+
+<% @order.products.each do |item| %>
+  <%= item.get_quantity(@order) %>
+  <%= link_to item.title, item %>
+  <%= number_to_currency(item.unit_price, strip_insignificant_zeros: true, delimiter: ".") %> 
+<% end %>
+
+Your order is just a step away!
+
