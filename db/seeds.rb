@@ -10,35 +10,36 @@
 # Product.delete_all
 # Order.delete_all
 # Payment.delete_all
-# 
+
 code = "password"
 
-1.times do 
-  User.create(
-      email: "admin@example.com", 
-      name: "admin", 
-      country: "Chile", 
-      password: code
-  ).add_role :admin
-end
+# 1.times do 
+#   User.create(
+#       email: "admin@example.com", 
+#       name: "admin", 
+#       country: "Chile", 
+#       password: "password"
+#   ).add_role :admin
+# end
 
 50.times do 
-  User.create(
-      email: "owner#{rand(1..50)}@example.com",
+  a = User.create(
+      email: "owner#{rand(100..200)}@example.com",
       name: Faker::Artist.unique.name,
       country: Faker::Address.country,
-      password: code
-  ).add_role :owner
+      password: code)
+  a.add_role :owner
+  a.remove_role :normaluser
 end
 
 50.times do 
   User.create(
-      email: "user#{rand(1..50)}@example.com",
+      email: "user#{rand(100..200)}@example.com",
       name: Faker::Name.unique.name,
       country: Faker::Address.country,
-      password: code
-  ).add_role :normaluser
+      password: code)
 end
+
 
 users = User.with_role(:owner).pluck(:id)
 
