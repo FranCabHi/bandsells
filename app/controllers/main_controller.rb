@@ -10,7 +10,7 @@ class MainController < ApplicationController
 	def dashboard
     if current_user.has_cached_role?(:admin)
       @products = Product.all.order(stock: :desc).page(params[:page]).per(20)
-      @users = User.all.eager_load(:roles).order(role_id: :asc).page(params[:page]).per(20)
+      @users = User.all.joins(:roles).order(role_id: :asc).page(params[:page]).per(20)
 
       @monthly_completed_orders = Order.where(state: 2).group_by_month(:created_at).count
       @products_by_owner = Product.joins(:user).group("users.name").count
