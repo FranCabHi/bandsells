@@ -10,6 +10,7 @@ class MainController < ApplicationController
 	def dashboard
     if current_user.has_cached_role?(:admin)
       @products = Product.all.order(stock: :desc).page(params[:page]).per(20)
+      @q = Product.includes(:order).ransack(params[:q])
       @users = User.all.joins(:roles).order(role_id: :asc).page(params[:page]).per(20)
 
       @monthly_completed_orders = Order.where(state: 2).group_by_month(:created_at).count
@@ -19,6 +20,7 @@ class MainController < ApplicationController
 
     elsif current_user.has_cached_role?(:owner)
       @products = Product.where(user_id: current_user.id).order(stock: :desc).page(params[:page]).per(20)
+      @q = Product.includes(:user).where(user_id: current_user.id).ransack(params[:q])
 
       @monthly_completed_orders = Order.joins(:products).where(orders: {state: 2}, products: {user_id: current_user.id}).group_by_month(:created_at).count
       @products_by_stock = Product.where(user_id: current_user.id).group(:title).maximum(:stock)
@@ -27,9 +29,10 @@ class MainController < ApplicationController
 
     else
       @products = Product.joins(:orders).where(orders: {user_id: current_user.id, state: 2}).page(params[:page]).per(20)
+      @q = Product.includes(:orders).where(orders: {user_id: current_user.id, state: 2}).ransack(params[:q])
     end
 
-    @q = Product.ransack(params[:q])
+    
     @products = @q.result(distinct: true).page(params[:page]).per(20)
 
   end
