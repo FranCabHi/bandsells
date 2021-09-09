@@ -1,14 +1,16 @@
 <div class="card">
-    <div class="card-header bg-dark text-light">
+    <div class="card-header bg-secondary text-light">
         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-        <a href="<%= products_path%>" class="btn btn-outline-info btn-sm pull-right">Continue Shopping</a>
+        <a href="<%= products_path%>" class="btn btn-light btn-sm pull-right">Continue Shopping</a>
         <div class="clearfix"></div>
     </div>
     <div class="card-body">
       <% @order.products.each do |item| %>
         <div class="row">
             <div class="col-xs-2 col-md-2">
-                <img class="img-responsive" src="http://placehold.it/120x80" alt="prewiew">
+              <% if item.image.attached? %>
+                <%= image_tag item.image.variant(resize: "75x50"), alt: "#{item.title}" %>
+				      <% end %>
             </div>
             <div class="col-xs-4 col-md-6">
               <h4 class="product-name"><strong><%= item.title %></strong></h4><h4><small><%= item.description %></small></h4>
@@ -21,7 +23,9 @@
                   <%= item.get_quantity(@order)%>
                 </div>
                 <div class="col-xs-2 col-md-2">
-                  <%= link_to 'Remove product', remove_product_path(@order.id, item.id), method: :delete  %>
+                  <%= link_to remove_product_path(@order.id, item.id), method: :delete do  %>
+                  <i class="far fa-trash-alt fa-2x"></i>
+                  <% end %>
                 </div>
             </div>
         </div>
@@ -32,7 +36,7 @@
     <div class="card-footer">
         <div class="pull-right" style="margin: 5px">
           Total: <%= number_to_currency(@order.total, strip_insignificant_zeros: true, delimiter: ".") %></b>
-          <%= button_to "Pay with mercado pago", mercado_pago_path(@order.id), method: :get, class:"btn btn-info btn-sm" %>
+          <%= button_to "Pay with mercado pago", mercado_pago_path(@order.id), method: :get, class:"btn btn-primary btn-sm" %>
         </div>
     </div>
 </div>
