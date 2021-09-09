@@ -23,7 +23,7 @@
         <% end %>
       </tbody>
     </table>
-    <p>Total: <%= @payment.total %></p>
+    <p>Total: <%= number_to_currency(@payment.total, strip_insignificant_zeros: true, delimiter: ".") %></p>
     <p>Your order is just a step away!</p>
   </body>
 </html>
