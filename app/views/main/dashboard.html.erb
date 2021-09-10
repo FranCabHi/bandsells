@@ -3,44 +3,43 @@
     <div class="row">
       <div class="col-xl-12 mx-auto">
         <div class="cta-inner bg-faded text-center rounded">
-          <h2 class="section-heading mb-5">
-            <span class="section-heading-lower">Dashboard</span>
-          </h2>
-            <div class="accordion accordion-flush" id="dashboardAccordion">
-             <%# Product list %>
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="flush-headingTwo">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                    <%= current_user.has_role?(:normaluser) ? "Bought Products" : "Listed Products" %>
-                  </button>          
-                </h2>
-                <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#dashboardAccordion">
-                  <div class="accordion-body">
-  
-                    <%= render "main/products" %>
+ 
+            <h2 class="section-heading mb-5">
+              <span class="section-heading-lower">Dashboard</span>
+            </h2>
+            <div class="row justify-content-sm-center">
+              <div class="col-sm-3">
+                <div class="card">
+                  <div class="card-body">
+                    <h1 class="card-title"><%= link_to @users_count, users_list_path %></h1>
+                    <p class="card-text">Registered users.</p>
                   </div>
                 </div>
               </div>
-              <%# User list %>
-              <% if current_user.has_role? :admin %>
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="flush-headingOne">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                      Registered Users
-                    </button>
-                  </h2>
-                  <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#dashboardAccordion">
-                    <div class="accordion-body"><%= render "main/users" %></div>
+              <div class="col-sm-3">
+                <div class="card">
+                  <div class="card-body">
+                    <h1 class="card-title"><%= link_to @completed_orders_count, orders_path %></h1>
+                    <p class="card-text">Completed orders.</p>
                   </div>
-                </div>                
-              <% end %>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="card">
+                  <div class="card-body">
+                    <h1 class="card-title"><%= link_to @products_count, product_list_path %></h1>
+                    <p class="card-text">Listed products.</p>
+                  </div>
+                </div>
+              </div>
             </div>
-          <% if current_user.has_role?(:admin) || current_user.has_role?(:owner) %>
+         
+        
             <h2 class="section-heading my-5">
               <span class="section-heading-lower">Chart Overview</span>
             </h2>
             <%= render "main/charts" %>
-          <% end %>
+     
         </div>
       </div>
     </div>

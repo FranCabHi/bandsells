@@ -1,0 +1,81 @@
+<section class="page-section cta">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-12 mx-auto">
+        <div class="cta-inner bg-faded text-center rounded">
+ 
+
+          <% if current_user.has_role?(:owner) || current_user.has_role?(:admin) %>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-2">
+              <%= link_to new_product_path do %>
+                <button class="btn btn-outline-dark btn-sm" type="button">Add more products</button>
+              <% end %>
+              <button class="btn btn-outline-primary btn-sm" type="button">
+                <%= sort_link @q, :unit_price do %>
+                  Sort by Price
+                <% end %>
+              </button>
+              <button class="btn btn-outline-primary btn-sm" type="button">
+                <%= sort_link @q, :stock do %>
+                  Sort by Stock
+                <% end %>
+              </button>
+            </div>
+          <% end %>
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-xl-9 col-lg-10 mx-auto">
+                <h1><%= current_user.has_role?(:normaluser) ? "Bought Products" : "Listed Products" %></h1>
+                
+                <table class="mx-auto">
+                  <thead>
+                    <tr>
+                      <th>Owner</th>
+                      <th>Product</th>
+                      <th>Description</th>
+                      <th>Unit price</th>
+                      <th><%= current_user.has_role?(:normaluser) ? "Buy Again" : "Available Stock" %></th>
+                    </tr>
+                  </thead>
+                
+                  <tbody>
+                    <% @products.each do |product| %>
+                      <tr>
+                        <td><%= product.user.name %></td>
+                        <td><%= link_to product.title, product %></td>
+                        <td><%= product.description %></td>
+                        <td><%= number_to_currency(product.unit_price, strip_insignificant_zeros: true, delimiter: ".") %></td>
+                        <td>
+                          <% if current_user.has_role?(:normaluser) %>
+                            <% if product.stock > 0  %>
+                              <%= form_for :cart, url: cart_path, method: :put do |f| %>
+                                <%= f.hidden_field :product_id, value: product.id %>
+                                <%= f.hidden_field :quantity, value: 1 %>
+                                <%= f.submit "Add to cart", class: "btn btn-outline-dark mt-auto btn-sm" %>
+                              <% end %>
+                            <% else %>
+                              <%= button_tag "Out of Stock", disabled: true, class: "btn btn-outline-dark mt-auto btn-sm"%>
+                            <% end %>
+                          <% else %>
+                            <%= product.stock %>
+                          <% end %>
+                        </td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+                <div class="pagination justify-content-center pagination-sm">
+                  <h5 class="m-4 text-center p-3">
+                    <span class="address" style="letter-spacing: 2px"><%= paginate @products %></span>
+                  </h5>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

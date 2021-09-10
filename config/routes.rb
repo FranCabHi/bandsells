@@ -17,7 +17,10 @@ Rails.application.routes.draw do
 
   root to: "main#index"
 
-  get "users", to: "main#users"
+  
+  delete "users/:id", to: "users#destroy", as: "destroy_user"
+
+  get "users_list", to: "main#users"
   get "product_list", to: "main#products"
   get "dashboard", to: "main#dashboard"
   get "/edit_role/:user_id", to: "main#edit_role", as: "edit_role"
