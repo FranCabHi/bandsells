@@ -22,11 +22,17 @@ La aplicación cuenta con la opción de iniciar sesión desde Facebook y los pag
 
 El administrador tiene acceso especial a un dashboard completo con información de usuarios, productos disponibles y pedidos en curso. Puede gestionar todos estas secciones y otorgar permisos a los usuarios regulares para vender productos.
 
+usuario: admin@example.com
+contraseña: password
+
 #### Vendedor
 
 El vendedor puede comprar y vender productos. También tiene acceso a un dashboard reducido sobre el rendimiento de sus productos, así como la posibilidad de editar la información de los productos que ofrece actualmente, incluido el stock disponible.
 
-### Usuario regular
+usuario: owner32@example.com
+contraseña: password
+
+#### Usuario regular
 
 El usuario regular solo puede comprar productos. Tiene acceso a una vista especial con el detalle de sus pedidos realizados y los productos que compró, a fin de que sea más fácil volver a comprarlos.
 Los usuarios recibirán un correo electrónico con la información de su compra (sendgrid) cuando esta sea pagada.
