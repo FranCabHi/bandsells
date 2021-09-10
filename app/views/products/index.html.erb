@@ -13,7 +13,7 @@
         <% end %>
 
         <div class="input-group p-2 bd-highlight justify-content-md-end">
-          <% if current_user.has_cached_role?(:owner) || current_user.has_cached_role?(:admin) %>
+          <% if current_user.has_role?(:owner) || current_user.has_role?(:admin) %>
             <%= link_to new_product_path do %>
               <button class="btn btn-outline-dark btn-sm" type="button">Add more products</button>
             <% end %>

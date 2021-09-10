@@ -8,7 +8,7 @@ class MainController < ApplicationController
   end
   
 	def dashboard
-    if current_user.has_cached_role?(:admin)
+    if current_user.has_role?(:admin)
       @products_count = Product.all.count
       @completed_orders_count = Order.where(state: 2).count
      ### charts
@@ -34,12 +34,12 @@ class MainController < ApplicationController
   end
 
   def products
-    if current_user.has_cached_role?(:admin)
+    if current_user.has_role?(:admin)
       @products = Product.order(stock: :desc).page(params[:page]).per(20)
       @q = Product.ransack(params[:q])
       @products = @q.result(distinct: true).page(params[:page]).per(20)
 
-    elsif current_user.has_cached_role?(:owner)
+    elsif current_user.has_role?(:owner)
       @products = Product.where(user_id: current_user.id).order(stock: :desc).page(params[:page]).per(20)
       @q = Product.includes(:user).where(user_id: current_user.id).ransack(params[:q])
       @products = @q.result(distinct: true).page(params[:page]).per(20)
