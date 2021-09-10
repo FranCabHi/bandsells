@@ -23,7 +23,7 @@ class User < ApplicationRecord
     return user if user
     user = User.where(email: auth.info.email).first
     return user if user
-    puts "++++++++user"
+    puts "++++++++#{user} -- auth.info #{auth.info}"
     User.create(
       provider: auth.provider,
       uid: auth.uid,
