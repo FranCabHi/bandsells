@@ -23,10 +23,12 @@ class User < ApplicationRecord
     return user if user
     user = User.where(email: auth.info.email).first
     return user if user
+    puts "++++++++user"
     User.create(
       provider: auth.provider,
       uid: auth.uid,
       email: auth.info.email,
+      name: auth.info.first_name,
       password: Devise.friendly_token[0,20]
     )
   end
