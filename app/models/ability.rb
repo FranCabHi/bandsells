@@ -8,7 +8,7 @@ class Ability
     if user.admin?
       can :manage, :all
     elsif user.has_role? :owner
-      can :manage, Product
+      can :manage, Product 
     else
       can :read, Product
       can :like, Product

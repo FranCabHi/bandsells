@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-xl-12 mx-auto">
         <div class="cta-inner bg-faded text-center rounded">
- 
+    
             <h2 class="section-heading mb-5">
               <span class="section-heading-lower">Dashboard</span>
             </h2>
@@ -11,7 +11,13 @@
               <div class="col-sm-3">
                 <div class="card">
                   <div class="card-body">
-                    <h1 class="card-title"><%= link_to @users_count, users_list_path %></h1>
+                    <h1 class="card-title">
+                      <% if current_user.has_role? :admin %>
+                        <%= link_to @users_count, users_list_path %>
+                      <% else %>
+                        <%= @users_count %>
+                      <% end %>
+                    </h1>
                     <p class="card-text">Registered users.</p>
                   </div>
                 </div>
@@ -39,7 +45,7 @@
               <span class="section-heading-lower">Chart Overview</span>
             </h2>
             <%= render "main/charts" %>
-     
+          
         </div>
       </div>
     </div>

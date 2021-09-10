@@ -1,5 +1,20 @@
-<h1>New Product</h1>
-
-<%= render 'form', product: @product %>
-
-<%= link_to 'Back', products_path %>
+<section class="page-section">
+  <div class="container">
+    <div class="about-heading-content">
+      <div class="row">
+        <div class="col-xl-9 col-lg-10 mx-auto">
+          <div class="bg-faded rounded p-5">
+            <h2 class="section-heading mb-4">
+              <span class="section-heading-lower">New Product</span>
+            </h2>
+            <p>
+              <%= render 'form', product: @product %>
+              
+              <%= link_to 'Back', products_path,  class: "btn btn-outline-dark btn-sm" %>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> 

@@ -1,44 +1,41 @@
-<h1>Edit Roles</h1>
-<%= @user.name %> <br>
+<section class="page-section cta">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-12 mx-auto">
+        <div class="cta-inner bg-faded text-center rounded">
+          <h1>Edit Roles</h1>
+          <h5><strong>User Name:</strong> <%= @user.name %></h5><br>
 
-<%#= form_for :user do |form| %>
-  <%# <div class="field"> %>
-    <%#= hidden_field_tag "user[role_ids][]", nil %>
-    <%# Role.all.each do |role| %>
-      <%#= check_box_tag "user[role_ids][]", role.id, @user.role_ids.include?(role.id), id: dom_id(role) %>
-      <%#= label_tag dom_id(role), role.name %>
-    <%# end %>
-  <%# </div> %>
-
-  <%# <div class="actions"> %>
-    <%#= form.submit %>
-  <%# </div> %>
-<%# end %>
-<%= form_for :role do |f| %>
-  <div class="field">
-    <%= hidden_field_tag "user[role_ids][]", nil %>
-    <%= f.label(:admin) do %>
-      Admin
-      <%= hidden_field_tag(:admin, 0) %>
-      <%= check_box_tag(:admin, 1, @user.has_role?(:admin)) %>
-    <% end %>
-    <br>
-    <%= f.label(:owner) do %>
-      Owner
-      <%= hidden_field_tag(:owner, 0) %>
-      <%= check_box_tag(:owner, 1, @user.has_role?(:owner)) %>
-    <% end %>
-    <br>
-    <%= f.label(:normaluser) do %>
-      Normal user
-      <%= hidden_field_tag(:normaluser, 0) %>
-      <%= check_box_tag(:normaluser, 1, @user.has_role?(:normaluser)) %>
-    <% end %>
-    <br>
+          <%= form_for :role do |f| %>
+            <div class="field">
+              <%= hidden_field_tag "user[role_ids][]", nil %>
+              <%= f.label(:admin) do %>
+                Admin
+                <%= hidden_field_tag(:admin, 0) %>
+                <%= check_box_tag(:admin, 1, @user.has_role?(:admin)) %>
+              <% end %>
+              <br>
+              <%= f.label(:owner) do %>
+                Owner
+                <%= hidden_field_tag(:owner, 0) %>
+                <%= check_box_tag(:owner, 1, @user.has_role?(:owner)) %>
+              <% end %>
+              <br>
+              <%= f.label(:normaluser) do %>
+                Normal user
+                <%= hidden_field_tag(:normaluser, 0) %>
+                <%= check_box_tag(:normaluser, 1, @user.has_role?(:normaluser)) %>
+              <% end %>
+              <br>
+            </div>
+            <div class="actions">
+              <%= f.submit %>
+            </div>
+          <% end %>
+          </br>
+          <%= link_to "Back to user list", users_list_path %>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
-</br>
-<%= link_to "Back to user list", dashboard_path %>
+</section>

@@ -6,17 +6,17 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mx-auto">
-        <li class="nav-item px-lg-4 px-lg-4">
-          <% if user_signed_in? %>
-            <%= link_to 'Home', dashboard_path, class: "nav-link text-uppercase" %>
-          <% else %>
-            <%= link_to 'Home', root_path, class: "nav-link text-uppercase" %>
-          <% end %>
-        </li>
-        <li class="nav-item px-lg-4 px-lg-4">
-          <%= link_to 'Goods & Merch', products_path, class: "nav-link text-uppercase" %>
-        </li>
         <% if user_signed_in? %>
+          <li class="nav-item px-lg-4 px-lg-4">
+              <% if current_user.has_role?(:normaluser) %>
+                <%= link_to 'Products',  product_list_path, class: "nav-link text-uppercase" %>
+              <% else %>
+                <%= link_to 'Home', dashboard_path, class: "nav-link text-uppercase" %>
+              <% end %>
+          </li>
+          <li class="nav-item px-lg-4 px-lg-4">
+            <%= link_to 'Goods & Merch', products_path, class: "nav-link text-uppercase" %>
+          </li>
           <li class="nav-item px-lg-4">
             <%= link_to 'Orders', orders_path, class: "nav-link text-uppercase" %>
           </li>
@@ -34,6 +34,9 @@
             </ul>
           </li>
          <% else %>
+          <li class="nav-item px-lg-4">
+            <%= link_to 'Home', root_path, class: "nav-link text-uppercase" %>
+          </li>
           <li class="nav-item px-lg-4">
             <%= link_to "Sign up", new_user_registration_path, class: "nav-link text-uppercase" %>
           </li>
