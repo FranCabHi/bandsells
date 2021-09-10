@@ -7,7 +7,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :omniauthable
   
   has_many :products, dependent: :destroy
-  has_many :orders, dependent: :destroy
+  has_many :orders, dependent: :nullify
   acts_as_voter
 
   def assign_default_role
