@@ -25,7 +25,6 @@
                       <td><%= order.quantity %></td>
                       <td><%= number_to_currency(order.total, strip_insignificant_zeros: true, delimiter: ".") %></td>
                       <td><%= order.state %></td>
-                      <td><%= order.user.name %></td>
                       <% if order.state == "created" %>
                         <td><%= link_to 'Cart', cart_path %></td>
                         <td>
