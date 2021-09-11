@@ -27,7 +27,7 @@ end
 50.times do 
   a = User.create(
       email: "owner#{rand(100..200)}@example.com",
-      name: Faker::Artist.unique.name,
+      name: Faker::Artist.name,
       country: Faker::Address.country,
       password: code)
   a.add_role :owner
@@ -37,7 +37,7 @@ end
 50.times do 
   User.create(
       email: "user#{rand(100..200)}@example.com",
-      name: Faker::Name.unique.name,
+      name: Faker::Name.name,
       country: Faker::Address.country,
       password: code)
 end
@@ -47,7 +47,7 @@ users = User.with_role(:owner).pluck(:id)
 
 60.times do  
   good = Product.create(
-      title: Faker::Music.unique.album,
+      title: Faker::Music.album,
       description: Faker::Lorem.sentence(word_count: 5),
       stock: rand(1..20),
       unit_price: rand(1199..2099)*10,
